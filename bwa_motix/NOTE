@@ -1,0 +1,13 @@
+1. Mengatur struktur folder aplikasi, karena kita menggunakan arsitektur MVVM, jadi kita menggunakan folder : model, view, model view.
+folder di lib 
+- models
+- ui (view)
+- bloc (model view / state management)
+- shared (berisi code yang akan kita pakai di berbagai tempat / sharing)
+- services (untuk menyimpan servis-servis)
+- exstensions (tempat kita naruh ekstension yang akan digunakan)
+
+- ui \ pages (untuk page)
+- ui \ widgets (kumpulan widgets yg akan dibuat secara custom)  
+
+2. Buat file barel per folder (e.g. bloc/blocs.dart) agar yg di import cuma blocs.dart dan rapi.
