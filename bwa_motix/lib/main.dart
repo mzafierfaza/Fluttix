@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
                   child: Text("Sign Up"),
                   onPressed: () async {
                     SignInSignUpResult result = await AuthServices.signUp(
-                        "erenyeager@eldia.com",
+                        "connie@eldia.com",
                         "eren123",
-                        "Eren yeager",
-                        ['Action, Drama, War'],
+                        "connie springbed",
+                        ['Action', 'Drama', 'War'],
                         "Japanese");
                     if (result.user == null) {
                       print(result.message);
