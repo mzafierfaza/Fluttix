@@ -17,6 +17,11 @@ class User extends Equatable {
       this.selectedLanguange});
 
   @override
+  String toString() {
+    return "[$id] - $name, $email";
+  } // berfungsi menimpa toString agar return nya jadi yg di inginkan
+
+  @override
   List<Object> get props => [
         id,
         email,
