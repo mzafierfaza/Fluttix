@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
                   child: Text("Sign Up"),
                   onPressed: () async {
                     SignInSignUpResult result = await AuthServices.signUp(
-                        "connie@eldia.com",
+                        "floch_marley@eldia.com",
                         "eren123",
-                        "connie springbed",
+                        "floch marley",
                         ['Action', 'Drama', 'War'],
                         "Japanese");
                     if (result.user == null) {
@@ -28,7 +28,18 @@ class MyApp extends StatelessWidget {
                     } else {
                       print(result.user.toString());
                     }
-                  })
+                  }),
+              RaisedButton(
+                  child: Text("Sign In"),
+                  onPressed: () async {
+                    SignInSignUpResult result = await AuthServices.signIn(
+                        "connie@eldia.com", "eren1233");
+                    if (result.user == null) {
+                      print(result.message);
+                    } else {
+                      print(result.user.toString());
+                    }
+                  }),
             ],
           ),
         ),

@@ -13,11 +13,9 @@ class AuthServices {
     try {
       // daftarkan email dan password ke firebase auth
       // nanti createUserWithEmail itu akan mengembalikan auth result / firebase user.
-
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       // kalau berhasil nanti di unobject kan user nyaa. kalau gagal akan mengembalikan null.
-
       // kita akan buat lagi data user yg berhasil tadi ke firestore. nama, email, dll.
       // convert firebase user ke User
       User user = result.user.convertToUser(
@@ -32,6 +30,26 @@ class AuthServices {
     } catch (e) {
       return SignInSignUpResult(message: e.toString());
     }
+  }
+
+  static Future<SignInSignUpResult> signIn(
+      String email, String password) async {
+    try {
+      AuthResult result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+
+      // kalau berhasil mengubah firebaseUser ke User.
+      User user = await result.user.fromFirestore();
+
+      return SignInSignUpResult(user: user);
+    } catch (e) {
+      return SignInSignUpResult(message: e.toString().split(',')[1]);
+      // split (',') itu untuk memisahkan log error dari firebase supaya jadi lebih ke user friendly, dan 1 itu index ke 1 dari kata2 nya.
+    }
+  }
+
+  static Future<void> signOut() async {
+    await _auth.signOut();
   }
 }
 
