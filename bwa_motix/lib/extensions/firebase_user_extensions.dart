@@ -5,7 +5,7 @@ extension FirebaseUserExtension on FirebaseUser {
           {String name = "No Name",
           List<String> selectedGenres = const [],
           String selectedLanguange = "English",
-          int balance = 50000}) =>
+          int balance = 50000}) => // => = { return blablabla }
       User(this.uid, this.email,
           name: name,
           balance: balance,

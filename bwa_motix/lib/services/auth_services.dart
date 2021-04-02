@@ -32,6 +32,7 @@ class AuthServices {
     }
   }
 
+  // method untuk signIn
   static Future<SignInSignUpResult> signIn(
       String email, String password) async {
     try {
@@ -48,9 +49,14 @@ class AuthServices {
     }
   }
 
+  // method untuk sign Out
   static Future<void> signOut() async {
     await _auth.signOut();
   }
+
+  // method stream untuk kalo sudah login pindah ke main_page, kalo log out pindah ke splash screen dst.
+  static Stream<FirebaseUser> get userStream => _auth.onAuthStateChanged;
+  // onAuthStateChanged yang akan kasih tau kita kalau ada perubahan status pada firebase Auth
 }
 
 // class untuk dapetin hasil nya.

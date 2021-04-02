@@ -1,5 +1,10 @@
+import 'package:bwa_motix/bloc/page_bloc.dart';
 import 'package:bwa_motix/services/services.dart';
+import 'package:bwa_motix/ui/pages/pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import 'bloc/blocs.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,40 +13,17 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              RaisedButton(
-                  child: Text("Sign Up"),
-                  onPressed: () async {
-                    SignInSignUpResult result = await AuthServices.signUp(
-                        "floch_marley@eldia.com",
-                        "eren123",
-                        "floch marley",
-                        ['Action', 'Drama', 'War'],
-                        "Japanese");
-                    if (result.user == null) {
-                      print(result.message);
-                    } else {
-                      print(result.user.toString());
-                    }
-                  }),
-              RaisedButton(
-                  child: Text("Sign In"),
-                  onPressed: () async {
-                    SignInSignUpResult result = await AuthServices.signIn(
-                        "connie@eldia.com", "eren1233");
-                    if (result.user == null) {
-                      print(result.message);
-                    } else {
-                      print(result.user.toString());
-                    }
-                  }),
-            ],
-          ),
+    return StreamProvider.value(
+      value: AuthServices.userStream,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => PageBloc()),
+          BlocProvider(create: (_) => UserBloc())
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home:
+              Wrapper(), // Wrapper menentukan halaman yg mana yg akan dipakai. switch case nya halaman.
         ),
       ),
     );
