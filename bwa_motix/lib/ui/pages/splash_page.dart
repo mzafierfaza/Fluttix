@@ -4,16 +4,25 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Splash Page")),
+      backgroundColor: mainColor,
       body: Center(
-        child: RaisedButton(
-          child: Text("Go To Sign In Page"),
-          onPressed: () {
-            context.bloc<PageBloc>().add(
-                GoToLoginPage()); // ketika di klik maka akan pergi ke login page
-          },
-        ),
-      ),
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            height: 136,
+            decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage("assets/logo.png"))),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 70, bottom: 16),
+            child: Text(
+              "N",
+              style: blackTextFont.copyWith(fontSize: 20),
+            ),
+          )
+        ],
+      )),
     );
   }
 }
