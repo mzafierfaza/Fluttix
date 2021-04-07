@@ -1,4 +1,5 @@
 import 'package:bwa_motix/bloc/page_bloc.dart';
+import 'package:bwa_motix/bloc/theme_bloc.dart';
 import 'package:bwa_motix/services/services.dart';
 import 'package:bwa_motix/ui/pages/pages.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +19,16 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => PageBloc()),
-          BlocProvider(create: (_) => UserBloc())
+          BlocProvider(create: (_) => UserBloc()),
+          BlocProvider(create: (_) => ThemeBloc())
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home:
-              Wrapper(), // Wrapper menentukan halaman yg mana yg akan dipakai. switch case nya halaman.
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (_, themeState) => MaterialApp(
+            theme: themeState.themeData,
+            debugShowCheckedModeBanner: false,
+            home:
+                Wrapper(), // Wrapper menentukan halaman yg mana yg akan dipakai. switch case nya halaman.
+          ),
         ),
       ),
     );
