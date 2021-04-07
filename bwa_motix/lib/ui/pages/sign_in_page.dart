@@ -7,7 +7,7 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwrodController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   bool isEmailValid = false;
   bool isPasswordValid = false;
@@ -40,6 +40,12 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 TextField(
                     controller: emailController,
+                    onChanged: (text) {
+                      setState(() {
+                        // setState berfungsi jika email tidak valid, maka floating action button gakbisa di pencet
+                        isEmailValid = EmailValidator.validate(text);
+                      });
+                    },
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -48,7 +54,13 @@ class _SignInPageState extends State<SignInPage> {
                         hintText: "Email Address")),
                 SizedBox(height: 16),
                 TextField(
-                    controller: passwrodController,
+                    controller: passwordController,
+                    onChanged: (text) {
+                      setState(() {
+                        // setState berfungsi jika password tidak valid, maka floating action button gakbisa di pencet
+                        isPasswordValid = text.length >= 6;
+                      });
+                    },
                     obscureText: true,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -70,11 +82,45 @@ class _SignInPageState extends State<SignInPage> {
                     width: 50,
                     height: 50,
                     margin: EdgeInsets.only(top: 70, bottom: 20),
-                    child: FloatingActionButton(
-                      child: Icon(Icons.arrow_forward),
-                      backgroundColor: mainColor,
-                      onPressed: () {},
-                    ),
+                    child:
+                        isSigninIn // kalau isSignIn true maka yang ditampilkan spinkit
+                            ? SpinKitFadingCircle(color: mainColor)
+                            : FloatingActionButton(
+                                elevation: 0, // biar gak ada bayangan
+                                child: Icon(Icons.arrow_forward,
+                                    color: isEmailValid && isPasswordValid
+                                        ? Colors.white
+                                        : Color(0xFFBEBEBEBE)),
+                                backgroundColor: isEmailValid && isPasswordValid
+                                    ? mainColor
+                                    : Color(0xFFE4E4E4),
+                                onPressed: isEmailValid && isPasswordValid
+                                    ? () async {
+                                        setState(() {
+                                          isSigninIn = true;
+                                        });
+
+                                        SignInSignUpResult result =
+                                            await AuthServices.signIn(
+                                                emailController.text,
+                                                passwordController.text);
+
+                                        if (result.user = null) {
+                                          setState(() {
+                                            isSigninIn = false;
+                                          });
+
+                                          // tampilkan kesalahan
+                                          Flushbar(
+                                            duration: Duration(seconds: 4),
+                                            flushbarPosition:
+                                                FlushbarPosition.TOP,
+                                            backgroundColor: Color(0xFFFF5C83),
+                                            message: result.message,
+                                          )..show(context);
+                                        }
+                                      }
+                                    : null),
                   ),
                 ),
                 Row(
