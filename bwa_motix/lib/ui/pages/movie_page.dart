@@ -57,7 +57,7 @@ class MoviePage extends StatelessWidget {
                         // hitung2an nya cek aja di video, itu supaya kalo text panjg bisa dipotong
                         width: MediaQuery.of(context).size.width -
                             2 * defaultMargin -
-                            78,
+                            130, // di vidio ini jadi 78 nilai aslinyo
                         child: Text(
                           userState.user.name,
                           style: blackTextFont.copyWith(
@@ -73,8 +73,16 @@ class MoviePage extends StatelessWidget {
                                   symbol: "IDR ")
                               .format(userState.user.balance),
                           style: blueTextFont.copyWith(
-                              fontSize: 14, fontWeight: FontWeight.w400))
+                              fontSize: 15, fontWeight: FontWeight.w400))
                     ],
+                  ),
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("assets/logo.png"),
+                            fit: BoxFit.cover)),
                   )
                 ]);
               } else {

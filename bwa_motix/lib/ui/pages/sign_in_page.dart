@@ -113,7 +113,7 @@ class _SignInPageState extends State<SignInPage> {
                                                   emailController.text,
                                                   passwordController.text);
 
-                                          if (result.user = null) {
+                                          if (result.user == null) {
                                             setState(() {
                                               isSigninIn = false;
                                             });

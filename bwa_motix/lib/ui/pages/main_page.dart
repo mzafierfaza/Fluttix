@@ -38,6 +38,7 @@ class _MainPageState extends State<MainPage> {
             });
           },
           children: [
+            // 2 Page yang responsif
             Center(child: MoviePage()),
             Center(child: Text("My Tickets")),
           ],
@@ -58,6 +59,10 @@ class _MainPageState extends State<MainPage> {
                     width: 30,
                     child: Icon(MdiIcons.walletPlus,
                         color: Colors.white.withOpacity(0.98))),
+                onPressed: () {
+                  context.bloc<UserBloc>().add(SignOut());
+                  AuthServices.signOut();
+                },
               ),
             ))
       ],
