@@ -76,6 +76,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 90,
                         width: 90,
                         decoration: BoxDecoration(
+                            // borderRadius: BorderRadius.circular(8),
+                            // border: Border.all(color: mainColor),
                             shape: BoxShape.circle,
                             image: DecorationImage(
                                 image: (widget.registrationData.profileImage ==
@@ -133,6 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: 16),
               TextField(
                   controller: passwordController,
+                  obscureText: true,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
@@ -141,6 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: 16),
               TextField(
                   controller: retypePasswordController,
+                  obscureText: true,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
