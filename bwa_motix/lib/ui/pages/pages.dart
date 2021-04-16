@@ -3,6 +3,7 @@ import 'package:bwa_motix/bloc/page_bloc.dart';
 import 'package:bwa_motix/models/models.dart';
 import 'package:bwa_motix/services/services.dart';
 import 'package:bwa_motix/shared/shared.dart';
+import 'package:bwa_motix/ui/widgets/widgets.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

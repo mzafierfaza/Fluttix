@@ -17,7 +17,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController retypePasswordController = TextEditingController();
 
   @override
-  void InitState() {
+  void initState() {
     super.initState();
     nameController.text = widget.registrationData.name;
     emailController.text = widget.registrationData.email;
@@ -177,8 +177,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         backgroundColor: Color(0xFFFF5C83),
                         message: "Password tidak boleh kurang dari 6 huruf",
                       )..show(context);
-                    } else if (!EmailValidator.validate(emailController.text) !=
-                        retypePasswordController.text) {
+                    } else if (!EmailValidator.validate(emailController.text)) {
                       Flushbar(
                         duration: Duration(milliseconds: 1500),
                         flushbarPosition: FlushbarPosition.TOP,
@@ -190,8 +189,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       widget.registrationData.email = emailController.text;
                       widget.registrationData.password =
                           passwordController.text;
-
-                      // TODO: Pindah ke Preference Page
+                      context
+                          .bloc<PageBloc>()
+                          .add(GoToPreferencePage(widget.registrationData));
+                      // pindah page + bawa data yg disimpin.
                     }
                   })
             ])
