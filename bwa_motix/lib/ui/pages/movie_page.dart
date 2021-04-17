@@ -109,10 +109,12 @@ class MoviePage extends StatelessWidget {
                 List<Movie> movies = movieState.movies.sublist(0, 10);
                 return ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: movies.length,
+                    itemCount: 10,
                     itemBuilder: (_, index) => Container(
                         margin: EdgeInsets.all(5),
-                        child: MovieCard(movies[index])));
+                        child: Text(movies[index].title)));
+              } else {
+                return SpinKitFadingCircle(color: mainColor, size: 50);
               }
             }))
       ],

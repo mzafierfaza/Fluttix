@@ -26,7 +26,6 @@ class Movie extends Equatable {
       backdropPath: json['backdrop_path']);
 
   @override
-  // TODO: implement props
   List<Object> get props =>
       [id, title, voteAverage, overview, posterPath, backdropPath];
 }
