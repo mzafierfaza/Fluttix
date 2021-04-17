@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:bwa_motix/bloc/blocs.dart';
 import 'package:bwa_motix/models/models.dart';
 import 'package:equatable/equatable.dart';
 

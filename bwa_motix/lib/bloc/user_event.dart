@@ -18,3 +18,14 @@ class SignOut extends UserEvent {
   @override
   List<Object> get props => [];
 }
+
+class UpdateData extends UserEvent {
+  // kenapa cuma nama sm profile image, karena yg bisa diganti cuma itu, email gakbisa.
+  final String name;
+  final String profileImage;
+
+  UpdateData({this.name, this.profileImage});
+
+  @override
+  List<Object> get props => [name, profileImage];
+}

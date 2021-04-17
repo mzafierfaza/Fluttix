@@ -16,6 +16,16 @@ class User extends Equatable {
       this.selectedGenres,
       this.selectedLanguange});
 
+  // nama, profilePicture, dan balance yang bisa di ganti
+  User copyWith({String name, String profilePicture, int balance}) => User(
+      this.id, this.email,
+      name: name ??
+          this.name, // nama nya diganti dengan yg di update. tp kalo null pake yg lamo tula
+      profilePicture: profilePicture ?? this.profilePicture,
+      balance: balance ?? this.balance,
+      selectedGenres: selectedGenres,
+      selectedLanguange: selectedLanguange);
+
   @override
   String toString() {
     return "[$id] - $name, $email";

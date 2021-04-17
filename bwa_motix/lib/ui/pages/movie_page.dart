@@ -20,6 +20,17 @@ class MoviePage extends StatelessWidget {
                 BlocBuilder<UserBloc, UserState>(builder: (_, userState) {
               if (userState is UserLoaded) {
                 // jika data user udah ke ambil
+                // kalau image nya itu ada (user signup pake gambar) maka akan di upload
+                if (imageFileToUpload != null) {
+                  uploadImage(imageFileToUpload).then((downloadURL) {
+                    imageFileToUpload =
+                        null; // buat null lagi kalo selesai upload
+                    // setelah selesai kita akan update data user
+                    context.bloc<UserBloc>().add(UpdateData(
+                        profileImage:
+                            downloadURL)); // nampilin foto di mobvie page
+                  }); // then kalau sudah selesai ngapain,
+                }
                 return Row(children: [
                   // NOTE: Profile Picture
                   Container(
@@ -73,17 +84,9 @@ class MoviePage extends StatelessWidget {
                                   symbol: "IDR ")
                               .format(userState.user.balance),
                           style: blueTextFont.copyWith(
-                              fontSize: 15, fontWeight: FontWeight.w400))
+                              fontSize: 16, fontWeight: FontWeight.w800))
                     ],
                   ),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/logo.png"),
-                            fit: BoxFit.cover)),
-                  )
                 ]);
               } else {
                 // jika belum maka kita kasih indicator
@@ -91,6 +94,25 @@ class MoviePage extends StatelessWidget {
                   color: secondaryColor,
                   size: 50,
                 );
+              }
+            })),
+        Container(
+          margin: EdgeInsets.fromLTRB(defaultMargin, 20, defaultMargin, 12),
+          child: Text("New Movies",
+              style: blackTextFont.copyWith(
+                  fontSize: 18, fontWeight: FontWeight.bold)),
+        ),
+        SizedBox(
+            height: 140,
+            child: BlocBuilder<MovieBloc, MovieState>(builder: (_, movieState) {
+              if (movieState is MovieLoaded) {
+                List<Movie> movies = movieState.movies.sublist(0, 10);
+                return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: movies.length,
+                    itemBuilder: (_, index) => Container(
+                        margin: EdgeInsets.all(5),
+                        child: MovieCard(movies[index])));
               }
             }))
       ],
