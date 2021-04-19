@@ -10,7 +10,7 @@ class MovieServices {
 
     var response = await client.get(url);
 
-    if (response != 200) {
+    if (response.statusCode != 200) {
       return [];
     }
 
