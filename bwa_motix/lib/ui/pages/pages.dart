@@ -22,4 +22,6 @@ part 'sign_in_page.dart';
 part 'wrapper.dart';
 part 'splash_page.dart';
 part 'main_page.dart';
+part 'movie_detail_page.dart';
 part 'sign_up_page.dart';
+part 'select_schedule_page.dart';

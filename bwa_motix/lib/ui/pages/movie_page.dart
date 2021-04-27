@@ -119,7 +119,11 @@ class MoviePage extends StatelessWidget {
                             right: (index == movies.length - 1)
                                 ? defaultMargin
                                 : 16),
-                        child: MovieCard(movies[index])));
+                        child: MovieCard(movies[index], onTap: () {
+                          context
+                              .bloc<PageBloc>()
+                              .add(GoToMovieDetailPage(movies[index]));
+                        })));
               } else {
                 return SpinKitFadingCircle(color: mainColor, size: 50);
               }
@@ -183,7 +187,26 @@ class MoviePage extends StatelessWidget {
                 return SpinKitFadingCircle(color: mainColor, size: 50);
               }
             })),
-        SizedBox(height: 300),
+        // NOTE: GET LUCKY DAY
+        Container(
+          margin: EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 12),
+          child: Text(
+            "Get Lucky Day",
+            style: blackTextFont.copyWith(
+                fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Column(
+          children: dummyPromos
+              .map((e) => Padding(
+                  padding:
+                      EdgeInsets.fromLTRB(defaultMargin, 0, defaultMargin, 16),
+                  child: PromoCard(e)))
+              .toList(),
+        ),
+        SizedBox(
+          height: 100,
+        )
       ],
     );
   }
