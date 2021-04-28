@@ -23,25 +23,27 @@ class DateCard extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
-            color: isSelected ? secondaryColor : Colors.transparent,
+            color: isSelected ? mainColor : Colors.transparent,
             border: Border.all(
                 color: isSelected ? Colors.transparent : Color(0xFFE4E4E4))),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              date.shortDayName,
-              style: blackTextFont.copyWith(
-                  fontSize: 16, fontWeight: FontWeight.w400),
-            ),
+            Text(date.shortDayName,
+                style: isSelected
+                    ? whiteTextFont.copyWith(
+                        fontSize: 18, fontWeight: FontWeight.bold)
+                    : blackTextFont.copyWith(
+                        fontSize: 16, fontWeight: FontWeight.w400)),
             SizedBox(
               height: 6,
             ),
-            Text(
-              date.day.toString(),
-              style: blackTextFont.copyWith(
-                  fontSize: 16, fontWeight: FontWeight.w400),
-            )
+            Text(date.day.toString(),
+                style: isSelected
+                    ? whiteTextFont.copyWith(
+                        fontSize: 18, fontWeight: FontWeight.bold)
+                    : blackTextFont.copyWith(
+                        fontSize: 16, fontWeight: FontWeight.w400)),
           ],
         ),
       ),

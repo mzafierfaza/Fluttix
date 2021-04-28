@@ -25,3 +25,4 @@ part 'main_page.dart';
 part 'movie_detail_page.dart';
 part 'sign_up_page.dart';
 part 'select_schedule_page.dart';
+part 'select_seat_page.dart';
