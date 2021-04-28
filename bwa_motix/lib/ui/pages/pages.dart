@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:intl/intl.dart';
+import 'package:random_string/random_string.dart';
 
 part 'movie_page.dart';
 part 'account_confirmation_page.dart';

@@ -11,9 +11,12 @@ class SelectSeatPage extends StatefulWidget {
 
 class _SelectSeatPageState extends State<SelectSeatPage> {
   List<String> selectedSeats = [];
+  int price = 35000;
+  int total_price;
 
   @override
   Widget build(BuildContext context) {
+    total_price = selectedSeats.length * price;
     return WillPopScope(
         onWillPop: () async {
           context
@@ -98,15 +101,44 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                     // note: SEATS
                     generateSeats(),
                     // note: NEXT BUTTON
-                    SizedBox(
-                      height: 30,
-                    ),
+                    Container(
+                        margin: EdgeInsets.fromLTRB(
+                            defaultMargin + 25, 20, defaultMargin, 30),
+                        child: Row(
+                          children: [
+                            Text(
+                              selectedSeats.length.toString(),
+                              style: blackTextFont.copyWith(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              " x ",
+                              style: blackTextFont.copyWith(
+                                  fontSize: 18, fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              "IDR 35.000 = ",
+                              style: blackTextFont.copyWith(
+                                  fontSize: 18, fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              NumberFormat.currency(
+                                      locale: "id_ID",
+                                      decimalDigits: 0,
+                                      symbol: "IDR ")
+                                  .format(total_price),
+                              style: blackTextFont.copyWith(
+                                  fontSize: 18, fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        )),
+
                     Align(
                       alignment: Alignment.topCenter,
                       child: FloatingActionButton(
                           elevation: 0,
                           backgroundColor: selectedSeats.length > 0
-                              ? mainColor
+                              ? secondaryColor
                               : Color(0xFFE4E4E4),
                           child: Icon(
                             Icons.arrow_forward,
