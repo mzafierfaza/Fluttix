@@ -11,3 +11,4 @@ part 'movie_detail.dart';
 part 'credits.dart';
 part 'theater.dart';
 part 'ticket.dart';
+part 'flutix_transaction.dart';

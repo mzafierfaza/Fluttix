@@ -2,6 +2,7 @@ part of 'pages.dart';
 
 class SelectSchedulePage extends StatefulWidget {
   final MovieDetail movieDetail;
+
   // MovieDetail ini kita butuhkan untuk kita pasang ke dalam tiketnya
   //
   SelectSchedulePage(this.movieDetail);
@@ -47,22 +48,58 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
             ListView(
               children: <Widget>[
                 // NOTE: BACK BUTTON
-                Row(
+                Column(
                   children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(top: 20, left: defaultMargin),
-                      padding: EdgeInsets.all(1),
-                      child: GestureDetector(
-                        onTap: () {
-                          context
-                              .bloc<PageBloc>()
-                              .add(GoToMovieDetailPage(widget.movieDetail));
-                        },
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(top: 20, left: defaultMargin),
+                          padding: EdgeInsets.all(1),
+                          child: GestureDetector(
+                            onTap: () {
+                              context
+                                  .bloc<PageBloc>()
+                                  .add(GoToMovieDetailPage(widget.movieDetail));
+                            },
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding:
+                              EdgeInsets.only(top: 20, right: defaultMargin),
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                  margin: EdgeInsets.only(right: 16),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
+                                  child: Text(
+                                    widget.movieDetail.title,
+                                    style: blackTextFont.copyWith(fontSize: 20),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.clip,
+                                    textAlign: TextAlign.end,
+                                  )),
+                              Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    image: DecorationImage(
+                                        image: NetworkImage(imageBaseURL +
+                                            'w154' +
+                                            widget.movieDetail.posterPath),
+                                        fit: BoxFit.cover)),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),
@@ -134,7 +171,10 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
                                       null)));
                             }
                           }),
-                    ))
+                    )),
+                SizedBox(
+                  height: 40,
+                ),
               ],
             )
           ],
@@ -151,7 +191,7 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
     for (var theater in dummyTheaters) {
       // perulangan buat nampilkan nama theater
       widgets.add(Container(
-          margin: EdgeInsets.fromLTRB(defaultMargin, 0, defaultMargin, 16),
+          margin: EdgeInsets.fromLTRB(defaultMargin, 0, defaultMargin, 5),
           child:
               Text(theater.name, style: blackTextFont.copyWith(fontSize: 20))));
 

@@ -28,7 +28,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
         child: Scaffold(
             body: Stack(
           children: <Widget>[
-            Container(color: mainColor),
+            Container(color: secondaryColor),
             SafeArea(
               child: Container(color: Colors.white),
             ),
@@ -103,7 +103,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                     // note: NEXT BUTTON
                     Container(
                         margin: EdgeInsets.fromLTRB(
-                            defaultMargin + 25, 20, defaultMargin, 30),
+                            defaultMargin + 25, 20, defaultMargin, 10),
                         child: Row(
                           children: [
                             Text(
@@ -132,7 +132,15 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                             ),
                           ],
                         )),
-
+                    Container(
+                        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                        child: Divider(
+                          color: Color(0xFFE4E4E4),
+                          thickness: 1,
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Align(
                       alignment: Alignment.topCenter,
                       child: FloatingActionButton(
@@ -148,9 +156,11 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                           ),
                           onPressed: selectedSeats.length > 0
                               ? () {
-                                  // context.bloc<PageBloc>().add(GoToCheckoutPage(
-                                  //     widget.ticket
-                                  //         .copyWith(seats: selectedSeats)));
+                                  // disini kita pas pindah ngasih bangku2 yang dipilih.
+                                  // jadi fungsi copywith tu itu perlahan2 narok data ny.
+                                  context.bloc<PageBloc>().add(GoToCheckoutPage(
+                                      widget.ticket
+                                          .copyWith(seats: selectedSeats)));
                                 }
                               : null),
                     ),
