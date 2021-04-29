@@ -31,6 +31,38 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       await UserServices.updateUser(updatedUser);
 
       yield UserLoaded(updatedUser);
+    } else if (event is TopUp) {
+      // pastikan terlebih dahulu user nya udah ke load ato blm.
+      if (state is UserLoaded) {
+        try {
+          User updatedUser = (state as UserLoaded).user.copyWith(
+              balance: (state as UserLoaded).user.balance + event.amount);
+
+          await UserServices.updateUser(updatedUser);
+
+          yield UserLoaded(updatedUser);
+        } catch (e) {
+          print(e);
+        }
+      }
+    } else if (event is Purchase) {
+      // pastikan terlebih dahulu user nya udah ke load ato blm.
+      if (state is UserLoaded) {
+        try {
+          User updatedUser = (state as UserLoaded).user.copyWith(
+              balance: (state as UserLoaded).user.balance - event.amount);
+
+          await UserServices.updateUser(updatedUser);
+
+          yield UserLoaded(updatedUser);
+        } catch (e) {
+          print(e);
+        }
+      }
     }
   }
 }
+
+// ticket bloc ini berfungsi untuk menyimpan state dari ticket yang kita beli.
+// kalo di ecommerce ini bisa dibilang "keranjang belanja".
+//
